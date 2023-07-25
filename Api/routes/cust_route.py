@@ -1,6 +1,5 @@
 from flask import Blueprint, request, jsonify
-from models.customer_model import Customer
-from models import db
+from models.customer_model import Customer , db
 from sqlalchemy.exc import IntegrityError
 
 customers_bp = Blueprint('customers', __name__)

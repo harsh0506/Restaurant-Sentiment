@@ -1,6 +1,5 @@
 from flask import Blueprint, request, jsonify
-from models.review_model import Review
-from models import db
+from models.review_model import Review , db
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm.exc import NoResultFound
 

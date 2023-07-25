@@ -1,19 +1,5 @@
 from flask import Blueprint, request, jsonify
-from models.review_model import Review
-from models import db
-from sqlalchemy.exc import IntegrityError
-
-reviews_bp = Blueprint('reviews', __name__)
-
-@reviews_bp.route('/reviews', methods=['GET'])
-def get_reviews():
-    reviews = Review.query.all()
-    return jsonify([review.to_dict() for review in reviews])
-
-# Add other routes for reviews (create, update, delete) here
-
-from flask import Blueprint, request, jsonify
-from models import db, Restaurant
+from models.restaurant_model import db, Restaurant
 from sqlalchemy.exc import IntegrityError
 
 restaurants_bp = Blueprint('restaurants', __name__)
