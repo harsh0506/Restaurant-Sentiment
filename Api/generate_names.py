@@ -9,11 +9,8 @@ def generate_name():
 def main():
     start_time = time.time()
 
-    names = []
-    for i in range(500):
-        name = generate_name()
-        names.append(name)
-
+    names = [generate_name() for _ in range(500)]
+    
     end_time = time.time()
 
     print(names)

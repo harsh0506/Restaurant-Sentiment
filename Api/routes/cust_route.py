@@ -19,14 +19,28 @@ def get_customer(id):
 @customers_bp.route('/customers', methods=['POST'])
 def create_customer():
     data = request.get_json()
-    new_customer = Customer(name=data['name'], email=data['email'], phone=data['phone'])
-    db.session.add(new_customer)
-    try:
-        db.session.commit()
-        return jsonify(new_customer.to_dict()), 201
-    except IntegrityError:
-        db.session.rollback()
+    new_customer = Customer(name=data['name'], email=data['email'], username=data['username'])
+
+    # Check if the customer already exists
+    customer_exists = Customer.query.filter_by(email=new_customer.email).first()
+    # If the customer already exists, return an error
+    if customer_exists:
         return jsonify({'message': 'Customer with this email already exists'}), 400
+
+    # Validate the data and return an error if any of the fields are empty
+    if not new_customer.name:
+        return jsonify({'message': 'Please enter a name'}), 400
+    if not new_customer.email:
+        return jsonify({'message': 'Please enter an email address'}), 400
+    if not new_customer.username:
+        return jsonify({'message': 'Please enter a username'}), 400
+
+    # Add the customer to the database and commit the changes
+    db.session.add(new_customer)
+    db.session.commit()
+
+    # Return the customer as JSON
+    return jsonify(new_customer.to_dict()), 201
 
 @customers_bp.route('/customers/<int:id>', methods=['PUT'])
 def update_customer(id):
