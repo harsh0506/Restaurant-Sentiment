@@ -1,8 +1,11 @@
+import sys
+sys.path.append('/app/Api')
 from flask import Flask
 from models import db
 from routes.res_route import restaurants_bp
 from routes.cust_route import customers_bp
 from routes.review_route import reviews_bp
+
 
 app = Flask(__name__)
 

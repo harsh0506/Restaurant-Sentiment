@@ -1,26 +1,23 @@
 # Use the official Python base image
-FROM python:3.8
+FROM python:3.9
 
-# Set the working directory in the container
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the requirements.txt file to the container
-COPY Api/requirements.txt .
+# Copy the necessary files into the container
+COPY Api ./Api
+COPY models ./models
+COPY Dockerfile /app
+COPY Api/app.py /app
+COPY Api/.env /app
+COPY Api/config.py /app
 
-# Install the Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Install the required Python packages
+RUN pip install --no-cache-dir flask gunicorn flask-cors pandas nltk python-dotenv psycopg2 aiohttp Flask-SQLAlchemy scikit-learn==1.3.0 flask-cors
+RUN pip install gunicorn Flask[async]
 
-# Copy the rest of the app code to the container
-COPY api/ app/
-COPY models/ models/
-
-# Expose the Flask app port
+# Expose the port on which the Flask app will run (adjust if necessary)
 EXPOSE 5000
 
-# Set environment variables (Optional: You can load .env at runtime instead)
-ENV FLASK_APP=app.py
-ENV FLASK_ENV=production
-ENV DOTENV_PATH=api/.env
-
-# Run the Flask app using Gunicorn as the WSGI server
-CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:5000"]
+# Define the command to run your application
+CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:5000", "--workers", "4"]
