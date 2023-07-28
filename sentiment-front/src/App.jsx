@@ -51,76 +51,95 @@ function App() {
   };
 
   return (
-    <div className="flex  items-center justify-center min-h-screen bg-gray-100">
-      <div className="flex w-full max-w-md">
+    <div style={{
+      display: "flex",
+      alignItems: "center",
+      width:"100vw",height:"100vh",
+      justifyContent: "center"
+    }} className="flex  items-center justify-center min-h-screen bg-gray-100">
+
+
+      {/* Left */}
+      <div style={{width:"50%"}} className="flex w-full max-w-md">
         <h2 className="text-2xl font-bold mb-4">Give Feedback</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block">Food:</label>
-              <select
-                value={food}
-                onChange={(e) => setFood(e.target.value)}
-                className="w-full bg-white border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
-              >
-                {Array.from({ length: 5 }, (_, i) => i + 1).map((num) => (
-                  <option key={num} value={num}>
-                    {num}
-                  </option>
-                ))}
-              </select>
+
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(2, 1fr)",
+              gridTemplateRows: "repeat(2, 1fr)",
+              margin: 0,
+              padding: 0,
+            }}>
+              <div style={{padding: 20}}>
+                <label className="block">Food:</label>
+                <select
+                  value={food}
+                  onChange={(e) => setFood(e.target.value)}
+                  className="w-full bg-white border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
+                >
+                  {Array.from({ length: 5 }, (_, i) => i + 1).map((num) => (
+                    <option key={num} value={num}>
+                      {num}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div style={{padding: 20}}>
+                <label className="block">Ambience:</label>
+                <select
+                  value={ambience}
+                  onChange={(e) => setAmbience(e.target.value)}
+                  className="w-full bg-white border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
+                >
+                  {Array.from({ length: 5 }, (_, i) => i + 1).map((num) => (
+                    <option key={num} value={num}>
+                      {num}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div style={{padding: 20}}>
+                <label className="block">Hygiene:</label>
+                <select
+                  value={hygiene}
+                  onChange={(e) => setHygiene(e.target.value)}
+                  className="w-full bg-white border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
+                >
+                  {Array.from({ length: 5 }, (_, i) => i + 1).map((num) => (
+                    <option key={num} value={num}>
+                      {num}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div style={{padding: 20}}>
+                <label className="block">Service:</label>
+                <select
+                  value={service}
+                  onChange={(e) => setService(e.target.value)}
+                  className="w-full bg-white border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
+                >
+                  {Array.from({ length: 5 }, (_, i) => i + 1).map((num) => (
+                    <option key={num} value={num}>
+                      {num}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
+
             <div>
-              <label className="block">Ambience:</label>
-              <select
-                value={ambience}
-                onChange={(e) => setAmbience(e.target.value)}
+              <label className="block">Comment:</label>
+              <input
+                type="text"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
                 className="w-full bg-white border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
-              >
-                {Array.from({ length: 5 }, (_, i) => i + 1).map((num) => (
-                  <option key={num} value={num}>
-                    {num}
-                  </option>
-                ))}
-              </select>
+              />
             </div>
-            <div>
-              <label className="block">Hygiene:</label>
-              <select
-                value={hygiene}
-                onChange={(e) => setHygiene(e.target.value)}
-                className="w-full bg-white border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
-              >
-                {Array.from({ length: 5 }, (_, i) => i + 1).map((num) => (
-                  <option key={num} value={num}>
-                    {num}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className="block">Service:</label>
-              <select
-                value={service}
-                onChange={(e) => setService(e.target.value)}
-                className="w-full bg-white border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
-              >
-                {Array.from({ length: 5 }, (_, i) => i + 1).map((num) => (
-                  <option key={num} value={num}>
-                    {num}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-          <div>
-            <label className="block">Comment:</label>
-            <input
-              type="text"
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              className="w-full bg-white border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
-            />
+
           </div>
           {formError && <p className="text-red-500">{formError}</p>}
           <button
@@ -131,8 +150,12 @@ function App() {
             {isFetching ? 'Sending...' : 'Submit'}
           </button>
         </form>
+
       </div>
-      <div>
+
+
+      { /* Right */}
+      <div style={{width:"50%"}} >
         <h3 className="text-2xl font-bold mt-4">Sentiment Analysis:</h3>
         {isFetching ? (
           <p>Loading sentiment...</p>
