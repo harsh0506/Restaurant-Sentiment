@@ -20,4 +20,4 @@ RUN pip install gunicorn Flask[async]
 EXPOSE 5000
 
 # Define the command to run your application
-CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:5000", "--workers", "4"]
+CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:5000"]
