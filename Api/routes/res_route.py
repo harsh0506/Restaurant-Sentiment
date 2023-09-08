@@ -1,4 +1,5 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify ,send_file
+import csv
 from models.restaurant_model import db, Restaurant
 from sqlalchemy.exc import IntegrityError
 
@@ -15,6 +16,7 @@ def get_restaurant(id):
     if restaurant:
         return jsonify(restaurant.to_dict())
     return jsonify({'message': 'Restaurant not found'}), 404
+
 
 @restaurants_bp.route('/restaurants', methods=['POST'])
 def create_restaurant():

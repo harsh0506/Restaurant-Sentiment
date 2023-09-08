@@ -22,3 +22,4 @@ app.register_blueprint(reviews_bp, url_prefix='/api')
 
 if __name__ == '__main__':
     app.run()
+

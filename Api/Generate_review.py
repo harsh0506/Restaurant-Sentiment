@@ -6,7 +6,6 @@ import aiohttp
 
 
 def generate_review():
-    rating = random.randint(1, 5)
     food = random.choice(["pizza", "pasta", "burger", "salad",
                          "steak", "chicken", "fish", "dessert", "drink"])
     ambience = random.choice(["nice", "bland", "noisy", "crowded",
@@ -17,8 +16,8 @@ def generate_review():
                             "slow", "fast", "friendly", "rude", "inattentive"])
     review = f"The {food} was delicious! The ambience was {ambience}, the hygiene was {hygiene}, and the service was {service}."
     # Generate random datetime between 1st January 2023 and 31st March 2023
-    start_date = datetime(2023, 1, 1)
-    end_date = datetime(2023, 3, 31)
+    start_date = datetime(2022, 10, 1)
+    end_date = datetime(2022, 12, 31)
     random_datetime = start_date + \
         timedelta(seconds=random.randint(
             0, int((end_date - start_date).total_seconds())))
@@ -56,7 +55,7 @@ async def send_post_request(session, data):
 async def main():
     start_time = time.time()
 
-    num_requests = 100
+    num_requests = 500
     reviews = [generate_review() for _ in range(num_requests)]
 
     async with aiohttp.ClientSession() as session:
