@@ -23,12 +23,13 @@ import pickle
 reviews_bp = Blueprint('reviews', __name__)
 
 # Load the pre-trained TF-IDF vectorizer
-with open('C:\\Users\\sneah\\Python projects\\Sentiment nalysis\\models\\tfidf.pkl', 'rb') as file:
+with open('/app/models/tfidf.pkl', 'rb') as file:
     tfidf = pickle.load(file)
 
 # Load the pre-trained Bernoulli Naive Bayes model
-with open('C:\\Users\\sneah\\Python projects\\Sentiment nalysis\\models\\bernoulli_model.pkl', 'rb') as file:
+with open('/app/models/bernoulli_model.pkl', 'rb') as file:
     bnb = pickle.load(file)
+
 
 
 def preprocess_review(text):
