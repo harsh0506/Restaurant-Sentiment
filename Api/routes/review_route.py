@@ -22,14 +22,23 @@ import pickle
 
 reviews_bp = Blueprint('reviews', __name__)
 
+# Get the directory of the current script
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Navigate up to the root directory of your project
+root_dir = os.path.abspath(os.path.join(script_dir, '..', '..'))
+
+# Define the file paths relative to the root directory
+tfidf_path = os.path.join(root_dir, 'models', 'tfidf.pkl')
+bnb_path = os.path.join(root_dir, 'models', 'bernoulli_model.pkl')
+
 # Load the pre-trained TF-IDF vectorizer
-with open('/app/models/tfidf.pkl', 'rb') as file:
+with open(tfidf_path, 'rb') as file:
     tfidf = pickle.load(file)
 
 # Load the pre-trained Bernoulli Naive Bayes model
-with open('/app/models/bernoulli_model.pkl', 'rb') as file:
+with open(bnb_path, 'rb') as file:
     bnb = pickle.load(file)
-
 
 
 def preprocess_review(text):

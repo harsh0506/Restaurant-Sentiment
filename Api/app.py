@@ -5,10 +5,10 @@ from models import db
 from routes.res_route import restaurants_bp
 from routes.cust_route import customers_bp
 from routes.review_route import reviews_bp
-
+from flask_cors import CORS
 
 app = Flask(__name__)
-
+CORS(app)
 # Load configuration from config.py
 app.config.from_object('config.Config')
 
